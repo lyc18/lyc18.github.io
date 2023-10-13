@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Hexo">
+    <meta name="keywords" content="struct字节对齐与使用问题, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | Hexo</title>
+    <title>struct字节对齐与使用问题 | Hexo</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/lyc18/lyc18.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/lyc18/lyc18.github.io/libs/awesome/css/all.css">
@@ -326,12 +326,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/lyc18/lyc18.github.io/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/lyc18/lyc18.github.io/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">struct字节对齐与使用问题</h1>
                 </div>
             </div>
         </div>
@@ -341,116 +341,39 @@
 
 
 
-<main class="post-container content">
+<main class="container content">
 
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lyc18/lyc18.github.io/libs/tocbot/tocbot.css">
-<style>
-    #articleContent h1::before,
-    #articleContent h2::before,
-    #articleContent h3::before,
-    #articleContent h4::before,
-    #articleContent h5::before,
-    #articleContent h6::before {
-        display: block;
-        content: " ";
-        height: 100px;
-        margin-top: -100px;
-        visibility: hidden;
-    }
-
-    #articleContent :focus {
-        outline: none;
-    }
-
-    .toc-fixed {
-        position: fixed;
-        top: 64px;
-    }
-
-    .toc-widget {
-        width: 345px;
-        padding-left: 20px;
-    }
-
-    .toc-widget .toc-title {
-        padding: 35px 0 15px 17px;
-        font-size: 1.5rem;
-        font-weight: bold;
-        line-height: 1.5rem;
-    }
-
-    .toc-widget ol {
-        padding: 0;
-        list-style: none;
-    }
-
-    #toc-content {
-        padding-bottom: 30px;
-        overflow: auto;
-    }
-
-    #toc-content ol {
-        padding-left: 10px;
-    }
-
-    #toc-content ol li {
-        padding-left: 10px;
-    }
-
-    #toc-content .toc-link:hover {
-        color: #42b983;
-        font-weight: 700;
-        text-decoration: underline;
-    }
-
-    #toc-content .toc-link::before {
-        background-color: transparent;
-        max-height: 25px;
-
-        position: absolute;
-        right: 23.5vw;
-        display: block;
-    }
-
-    #toc-content .is-active-link {
-        color: #42b983;
-    }
-
-    #floating-toc-btn {
-        position: fixed;
-        right: 15px;
-        bottom: 76px;
-        padding-top: 15px;
-        margin-bottom: 0;
-        z-index: 998;
-    }
-
-    #floating-toc-btn .btn-floating {
-        width: 48px;
-        height: 48px;
-    }
-
-    #floating-toc-btn .btn-floating i {
-        line-height: 48px;
-        font-size: 1.4rem;
-    }
-</style>
-<div class="row">
-    <div id="main-content" class="col s12 m12 l9">
-        <!-- 文章内容详情 -->
+    <!-- 文章内容详情 -->
 <div id="artDetail">
     <div class="card">
         <div class="card-content article-info">
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/C-C/">
+                                <span class="chip bg-color">C/C++</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%BC%96%E7%A8%8B%E9%97%AE%E9%A2%98/">
+                                <span class="chip bg-color">编程问题</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%B7%A5%E4%BD%9C%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                工作学习
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -459,28 +382,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-10-03
+                    2023-10-13
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-10-03
+                    2023-10-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    73
+                    773
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -503,19 +426,65 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h1 id="stuct字节对齐"><a href="#stuct字节对齐" class="headerlink" title="stuct字节对齐"></a><code>stuct</code>字节对齐</h1><p>在C和C++中，<code>struct</code>的成员在内存中的排序方式受到字节对齐的影响，<code>struct</code>的字节对齐通常以结构体的成员中具有最大对齐需求的成员为基准。例如，如果一个<code>struct</code>中包含<code>int</code>和<code>char</code>类型的成员，那么由于<code>int</code>的字节对齐需求通常较大，因此整个结构体将按照<code>int</code>的字节大小进行字节对齐。</p>
+<p>在我的理解中，字节对齐可以简单看作为：将连续的内存按照对齐值（如：x字节）分割为n个内存块（n为正整数），每个内存块的大小为对齐值（x字节）的大小，结构体中的成员会依次放入内存块中，若内存块中剩余的空间不足完整的放下当前成员，则将当前成员放置在下一个内存块的起始位置。</p>
+<p>通过具体的实验验证这一特性：</p>
+<ol>
+<li>假设由如下三个结构体：</li>
+</ol>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">struct struct_1 {
+    uint8_t a;   // uint8_t占用一个字节
+    uint16_t b;  // uint16_t占用两个字节
+    uint32_t c;  // uint32_t占用四个字节
+};
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+struct struct_2 {
+    uint16_t a;
+    uint16_t b;
+    uint32_t c;
+};
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+struct struct_3 {
+    uint16_t a;
+    uint32_t b;
+    uint16_t c;
+};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ol start="2">
+<li>分别输出三个结构体占用字节数</li>
+</ol>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">printf("struct_1 size: %d\n", sizeof(struct struct_1));  // struct_1 size: 8
+printf("struct_2 size: %d\n", sizeof(struct struct_2));  // struct_2 size: 8
+printf("struct_3 size: %d\n", sizeof(struct struct_3));  // struct_3 size: 12<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>受到字节对齐的影响，结构体中成员的类型与顺序都会影响到最终整个结构体占用的内存大小。</p>
+<ol start="3">
+<li>结构体在内存中实际的分布</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/lyc18/Picture-bed@main/img/202310132212579.png" alt="image.drawio"></p>
+<ul>
+<li><code>struct1</code>中<code>uint32_t</code>的字节对齐需求最大，因此<code>struct1</code>以4字节对齐。</li>
+<li>由于<code>uint8_t</code>与<code>uint16_t</code>分别占用1字节与2字节，且两个成员总大小小于4字节，因此两个成员处于内存中的前3个字节。</li>
+<li>由于<code>uint32_t</code>大小为4字节，第一个内存块无法完整放入<code>uint32_t</code>，因此<code>uint32_t</code>存入下一个内存块中。最终<code>sturct1</code>占用8个字节。</li>
+<li><code>struct2</code>与<code>struct3</code>同理。</li>
+</ul>
+<h1 id="struct字节对齐引发的问题"><a href="#struct字节对齐引发的问题" class="headerlink" title="struct字节对齐引发的问题"></a><code>struct</code>字节对齐引发的问题</h1><ul>
+<li>不合理的成员顺序，可能会造成大量的内存空间浪费。</li>
+<li>若使用内存拷贝对结构体进行赋值，若结构体内存不是紧凑的，即有部分填充字节，则可能无法获得正确的拷贝结果。<ul>
+<li>如<code>sturct1</code>中想要赋值的结果为<code>a = 0x00, b = 0x0102, c = 0x03040506</code>，而实际结果为<code>a = 0x00, b = 0x0203, c = 0x04050607</code>。</li>
+</ul>
+</li>
+<li>注意同一内存块中的不同的成员变量并不一定是紧凑的顺序，即用来占位的内存并不一定全部都在内存块的结尾。（参考<code>struct1</code>的内存分布情况）</li>
+<li>使用内存拷贝的方式赋值时，需要注意大小端存储的问题。<ul>
+<li>如<code>struct1</code>中从内存角度上看为<code>a = 0x00, b = 0x0203, c = 0x04050607</code>，而若在程序中使用<code>printf</code>输出的结果可能为<code>a = 0x00, b = 0x0302, c = 0x07060504</code>。</li>
+</ul>
+</li>
+</ul>
+<h1 id="struct字节对齐的优势"><a href="#struct字节对齐的优势" class="headerlink" title="struct字节对齐的优势"></a><code>struct</code>字节对齐的优势</h1><ul>
+<li>两个同类型的结构体变量可以直接赋值。</li>
+<li>提高访问速度。</li>
+<li>减少内存浪费。</li>
+</ul>
 
                 
             </div>
@@ -532,7 +501,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">Yongchang Li</a>
+                    <a href="/about" rel="external nofollow noreferrer">沐曦旅人</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -542,7 +511,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://lyc18.github.io/2023/10/03/hello-world/">http://lyc18.github.io/2023/10/03/hello-world/</a>
+                    <a href="http://lyc18.github.io/2023/10/13/struct-zi-jie-dui-qi-yu-shi-yong-wen-ti/">http://lyc18.github.io/2023/10/13/struct-zi-jie-dui-qi-yu-shi-yong-wen-ti/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -555,7 +524,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">Yongchang Li</a>
+                    <a href="/about" target="_blank">沐曦旅人</a>
                     !
                 </span>
             </div>
@@ -579,7 +548,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/C-C/">
+                                    <span class="chip bg-color">C/C++</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%BC%96%E7%A8%8B%E9%97%AE%E9%A2%98/">
+                                    <span class="chip bg-color">编程问题</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -747,9 +724,63 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/10/13/struct-zi-jie-dui-qi-yu-shi-yong-wen-ti/">
+                    <div class="card-image">
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/lyc18/lyc18.github.io/medias/featureimages/1.jpg" class="responsive-img" alt="struct字节对齐与使用问题">
+                        
+                        <span class="card-title">struct字节对齐与使用问题</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            在C和C++中，struct的成员在内存中的排序方式受到字节对齐的影响，这一特性会引发一些问题，在实际编程中需要注意。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-13
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%B7%A5%E4%BD%9C%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    工作学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C-C/">
+                        <span class="chip bg-color">C/C++</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BC%96%E7%A8%8B%E9%97%AE%E9%A2%98/">
+                        <span class="chip bg-color">编程问题</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2023/10/13/c-c-shi-xian-du-xie-wav-yin-pin-wen-jian/">
                     <div class="card-image">
@@ -766,9 +797,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-10-13
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-13
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -797,44 +828,6 @@
             </div>
         </div>
         
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2023/10/03/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/lyc18/lyc18.github.io/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-03
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            Yongchang Li
-                            
-                        </span>
-                    </div>
-                </div>
-
-                
-            </div>
-        </div>
-        
     </div>
 </article>
 
@@ -859,100 +852,6 @@
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/lyc18/lyc18.github.io/libs/codeBlock/codeShrink.js"></script>
 
-
-    </div>
-    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget card" style="background-color: white;">
-            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
-            <div id="toc-content"></div>
-        </div>
-    </div>
-</div>
-
-<!-- TOC 悬浮按钮. -->
-
-<div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
-</div>
-
-
-<script src="https://cdn.jsdelivr.net/gh/lyc18/lyc18.github.io/libs/tocbot/tocbot.min.js"></script>
-<script>
-    $(function () {
-        tocbot.init({
-            tocSelector: '#toc-content',
-            contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('0'),
-            headingSelector: 'h2, h3, h4'
-        });
-
-        // modify the toc link href to support Chinese.
-        let i = 0;
-        let tocHeading = 'toc-heading-';
-        $('#toc-content a').each(function () {
-            $(this).attr('href', '#' + tocHeading + (++i));
-        });
-
-        // modify the heading title id to support Chinese.
-        i = 0;
-        $('#articleContent').children('h2, h3, h4').each(function () {
-            $(this).attr('id', tocHeading + (++i));
-        });
-
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
-        let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
-            } else {
-                $tocWidget.removeClass('toc-fixed');
-            }
-        });
-
-        
-        /* 修复文章卡片 div 的宽度. */
-        let fixPostCardWidth = function (srcId, targetId) {
-            let srcDiv = $('#' + srcId);
-            if (srcDiv.length === 0) {
-                return;
-            }
-
-            let w = srcDiv.width();
-            if (w >= 450) {
-                w = w + 21;
-            } else if (w >= 350 && w < 450) {
-                w = w + 18;
-            } else if (w >= 300 && w < 350) {
-                w = w + 16;
-            } else {
-                w = w + 14;
-            }
-            $('#' + targetId).width(w);
-        };
-
-        // 切换TOC目录展开收缩的相关操作.
-        const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
-        let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).hide();
-                $mainContent.removeClass('l9');
-            } else {
-                $tocAside.addClass(expandedClass).show();
-                $mainContent.addClass('l9');
-            }
-            fixPostCardWidth('artDetail', 'prenext-posts');
-        });
-        
-    });
-</script>
 
     
 

@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>struct字节对齐与使用问题</title>
+      <link href="/2023/10/13/struct-zi-jie-dui-qi-yu-shi-yong-wen-ti/"/>
+      <url>/2023/10/13/struct-zi-jie-dui-qi-yu-shi-yong-wen-ti/</url>
+      
+        <content type="html"><![CDATA[<h1 id="stuct字节对齐"><a href="#stuct字节对齐" class="headerlink" title="stuct字节对齐"></a><code>stuct</code>字节对齐</h1><p>在C和C++中，<code>struct</code>的成员在内存中的排序方式受到字节对齐的影响，<code>struct</code>的字节对齐通常以结构体的成员中具有最大对齐需求的成员为基准。例如，如果一个<code>struct</code>中包含<code>int</code>和<code>char</code>类型的成员，那么由于<code>int</code>的字节对齐需求通常较大，因此整个结构体将按照<code>int</code>的字节大小进行字节对齐。</p><p>在我的理解中，字节对齐可以简单看作为：将连续的内存按照对齐值（如：x字节）分割为n个内存块（n为正整数），每个内存块的大小为对齐值（x字节）的大小，结构体中的成员会依次放入内存块中，若内存块中剩余的空间不足完整的放下当前成员，则将当前成员放置在下一个内存块的起始位置。</p><p>通过具体的实验验证这一特性：</p><ol><li>假设由如下三个结构体：</li></ol><pre class="line-numbers language-C" data-language="C"><code class="language-C">struct struct_1 {    uint8_t a;   // uint8_t占用一个字节    uint16_t b;  // uint16_t占用两个字节    uint32_t c;  // uint32_t占用四个字节};struct struct_2 {    uint16_t a;    uint16_t b;    uint32_t c;};struct struct_3 {    uint16_t a;    uint32_t b;    uint16_t c;};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ol start="2"><li>分别输出三个结构体占用字节数</li></ol><pre class="line-numbers language-C" data-language="C"><code class="language-C">printf("struct_1 size: %d\n", sizeof(struct struct_1));  // struct_1 size: 8printf("struct_2 size: %d\n", sizeof(struct struct_2));  // struct_2 size: 8printf("struct_3 size: %d\n", sizeof(struct struct_3));  // struct_3 size: 12<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>受到字节对齐的影响，结构体中成员的类型与顺序都会影响到最终整个结构体占用的内存大小。</p><ol start="3"><li>结构体在内存中实际的分布</li></ol><p><img src="https://cdn.jsdelivr.net/gh/lyc18/Picture-bed@main/img/202310132212579.png" alt="image.drawio"></p><ul><li><code>struct1</code>中<code>uint32_t</code>的字节对齐需求最大，因此<code>struct1</code>以4字节对齐。</li><li>由于<code>uint8_t</code>与<code>uint16_t</code>分别占用1字节与2字节，且两个成员总大小小于4字节，因此两个成员处于内存中的前3个字节。</li><li>由于<code>uint32_t</code>大小为4字节，第一个内存块无法完整放入<code>uint32_t</code>，因此<code>uint32_t</code>存入下一个内存块中。最终<code>sturct1</code>占用8个字节。</li><li><code>struct2</code>与<code>struct3</code>同理。</li></ul><h1 id="struct字节对齐引发的问题"><a href="#struct字节对齐引发的问题" class="headerlink" title="struct字节对齐引发的问题"></a><code>struct</code>字节对齐引发的问题</h1><ul><li>不合理的成员顺序，可能会造成大量的内存空间浪费。</li><li>若使用内存拷贝对结构体进行赋值，若结构体内存不是紧凑的，即有部分填充字节，则可能无法获得正确的拷贝结果。<ul><li>如<code>sturct1</code>中想要赋值的结果为<code>a = 0x00, b = 0x0102, c = 0x03040506</code>，而实际结果为<code>a = 0x00, b = 0x0203, c = 0x04050607</code>。</li></ul></li><li>注意同一内存块中的不同的成员变量并不一定是紧凑的顺序，即用来占位的内存并不一定全部都在内存块的结尾。（参考<code>struct1</code>的内存分布情况）</li><li>使用内存拷贝的方式赋值时，需要注意大小端存储的问题。<ul><li>如<code>struct1</code>中从内存角度上看为<code>a = 0x00, b = 0x0203, c = 0x04050607</code>，而若在程序中使用<code>printf</code>输出的结果可能为<code>a = 0x00, b = 0x0302, c = 0x07060504</code>。</li></ul></li></ul><h1 id="struct字节对齐的优势"><a href="#struct字节对齐的优势" class="headerlink" title="struct字节对齐的优势"></a><code>struct</code>字节对齐的优势</h1><ul><li>两个同类型的结构体变量可以直接赋值。</li><li>提高访问速度。</li><li>减少内存浪费。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工作学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C/C++ </tag>
+            
+            <tag> 编程问题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>C/C++实现读写WAV音频文件</title>
+      <link href="/2023/10/13/c-c-shi-xian-du-xie-wav-yin-pin-wen-jian/"/>
+      <url>/2023/10/13/c-c-shi-xian-du-xie-wav-yin-pin-wen-jian/</url>
+      
+        <content type="html"><![CDATA[<h1 id="C-C-实现读写WAV音频文件"><a href="#C-C-实现读写WAV音频文件" class="headerlink" title="C/C++实现读写WAV音频文件"></a>C/C++实现读写WAV音频文件</h1><p>WAV音频文件本质上是一个二进制文件，C语言可通过fopen读写二进制文件的方法读写WAV音频文件。但WAV文件内不仅存储了音频的数据，还存储的文件信息，因此若要获取正确的WAV文件内容，需要知道WAV存储的的格式，按照WAV格式进行读写操作。</p><h2 id="WAV格式文件"><a href="#WAV格式文件" class="headerlink" title="WAV格式文件"></a>WAV格式文件</h2><p>WAV（Waveform Audio File Format）是一种常见的音频文件格式，它通常用于存储未经压缩的音频数据。WAV文件遵循RIFF规则，其内容以区块为最小单位进行存储。WAV文件一般由3个区块组成：RIFF区块、Format区块和Data区块。</p><h2 id="RIFF区块"><a href="#RIFF区块" class="headerlink" title="RIFF区块"></a>RIFF区块</h2><table><thead><tr><th>名称</th><th>偏移地址</th><th>字节数</th><th>数据类型</th><th>端序</th><th>内容</th></tr></thead><tbody><tr><td>chunkID</td><td>0x00</td><td>4</td><td>char</td><td>大端</td><td>“RIFF”</td></tr><tr><td>chunkSize</td><td>0x04</td><td>4</td><td>uint32_t</td><td>小端</td><td>文件长度</td></tr><tr><td>format</td><td>0x08</td><td>4</td><td>char</td><td>大端</td><td>“WAVE”</td></tr></tbody></table><h2 id="Format区块"><a href="#Format区块" class="headerlink" title="Format区块"></a>Format区块</h2><table><thead><tr><th>名称</th><th>偏移地址</th><th>字节数</th><th>数据类型</th><th>端序</th><th>内容</th></tr></thead><tbody><tr><td>subchunk1ID</td><td>0x0C</td><td>4</td><td>char</td><td>大端</td><td>“fmt”，fmt标识</td></tr><tr><td>audioFormat</td><td>0x10</td><td>4</td><td>uint32_t</td><td>小端</td><td>子块大小，通常为16</td></tr><tr><td>audioFormat</td><td>0x14</td><td>2</td><td>uint16_t</td><td>小端</td><td>音频格式代码，1表示PCM无损编码</td></tr><tr><td>numChannels</td><td>0x16</td><td>2</td><td>uint16_t</td><td>小端</td><td>声道数，通常为1（单声道）或2（立体声）</td></tr><tr><td>sampleRate</td><td>0x18</td><td>2</td><td>uint16_t</td><td>小端</td><td>采样率，表示每秒的采样数</td></tr><tr><td>byteRate</td><td>0x1C</td><td>4</td><td>uint32_t</td><td>小端</td><td>每秒的字节数，等于<code>sampleRate</code> * <code>numChannels</code> * (<code>bitsPerSample</code> / 8)</td></tr><tr><td>blockAlign</td><td>0x20</td><td>2</td><td>uint16_t</td><td>小端</td><td>块对齐，等于<code>numChannels</code> * (<code>bitsPerSample</code> / 8)</td></tr><tr><td>bitsPerSample</td><td>0x22</td><td>2</td><td>uint16_t</td><td>小端</td><td>每个样本的位深度，通常为8、16、24或32</td></tr></tbody></table><h2 id="Data区块"><a href="#Data区块" class="headerlink" title="Data区块"></a>Data区块</h2><table><thead><tr><th>名称</th><th>偏移地址</th><th>字节数</th><th>数据类型</th><th>端序</th><th>内容</th></tr></thead><tbody><tr><td>subchunk2ID</td><td>0x24</td><td>4</td><td>char</td><td>大端</td><td>子块标识，通常为”data”</td></tr><tr><td>subchunk2Size</td><td>0x28</td><td>4</td><td>uint32_t</td><td>小端</td><td>音频数据大小，等于采样数 * <code>numChannels</code> * (<code>bitsPerSample</code> / 8)</td></tr><tr><td>data</td><td>0x2C</td><td></td><td></td><td></td><td>数据</td></tr></tbody></table><blockquote><p><code>uint16_t</code> 和 <code>uint32_t</code> 是无符号整数类型的数据类型，它们是C/C++ &lt;stdint.h&gt;标准库中定义的确切位数的整数类型.**<code>uint16_t</code><strong>：这是一个16位无符号整数类型，确保有16位位数，没有符号位。</strong><code>uint32_t</code>**：这是一个32位无符号整数类型，确保有32位位数，没有符号位。</p></blockquote><h1 id="C语言实现"><a href="#C语言实现" class="headerlink" title="C语言实现"></a>C语言实现</h1><pre class="line-numbers language-C" data-language="C"><code class="language-C">#include &lt;stdio.h&gt;#include &lt;string.h&gt;#include &lt;stdlib.h&gt;#include &lt;stdint.h&gt;// 定义WAV文件头部结构struct WAVHeader {    char chunkID[4];        // 文件标识，通常为"RIFF"    uint32_t chunkSize;     // 文件大小    char format[4];         // 文件格式，“WAVE”    char subchunk1ID[4];    // 子块标识，“fmt”    uint32_t subchunk1Size; // 子块大小    uint16_t audioFormat;   // 音频格式，1为PCM格式    uint16_t numChannels;   // 声道数，1:单声道，2:双声道    uint32_t sampleRate;    // 采样率    uint32_t byteRate;      // 每秒的字节数    uint16_t blockAlign;    // 块对齐    uint16_t bitsPerSample; // 采样深度    char subchunk2ID[4];    // 子块标识，“data”    uint32_t subchunk2Size; // 子块大小};// 音频数据结构struct WAVData {    struct WAVHeader header;  // 音频头部数据    uint8_t* sample;          // 音频数据};// 读取wav格式文件struct WAVData* audioread(const char* filename);// 写入wav格式文件void audiowrite(const char* filename, struct WAVData* audio_data);int main() {    char filename[30] = "../inputs/test.wav";    struct WAVData* audio_data = audioread(filename);    if (audio_data == NULL) {        perror("文件打开失败!");        return 1;    }    char outfilename[30] = "../outputs/test.wav";    audiowrite(outfilename, audio_data);    return 0;}struct WAVData* audioread(const char* filename) {    // 打开文件    FILE* inputFile = fopen(filename, "rb");    struct WAVData* audio_data = NULL;    if (inputFile == NULL) {        perror("文件代开失败!");        return NULL;    }    // 读取文件头部信息    struct WAVHeader header;    fread(&amp;header, sizeof(struct WAVHeader), 1, inputFile);    // 验证文件格式    if (strncmp(header.chunkID, "RIFF", 4) != 0 || strncmp(header.format, "WAVE", 4) != 0) {        perror("无效文件!");        fclose(inputFile);        return NULL;    }    // 输出wav文件信息    printf("音频格式: %hu\n", header.audioFormat);    printf("声道数: %hu\n", header.numChannels);    printf("采样率: %hu\n", header.sampleRate);    printf("采样深度: %hu\n", header.bitsPerSample);    // 读取wav文件数据    audio_data = (struct WAVData*)malloc(sizeof(struct WAVData));    if (audio_data == NULL) {        perror("内存申请失败!");        return NULL;    }    audio_data-&gt;header = header;    audio_data-&gt;sample = (uint8_t*)malloc(header.subchunk2Size);    if (audio_data-&gt;sample == NULL) {        perror("内存申请失败!");        free(audio_data);        return NULL;    }    fread(audio_data-&gt;sample, header.subchunk2Size, 1, inputFile);    fclose(inputFile);    return audio_data;}void audiowrite(const char* filename, struct WAVData* audio_data) {    // 打开输出文件    FILE* outputFile = fopen(filename, "wb");    if (outputFile == NULL) {        perror("文件打开失败!");        return;    }    // 写入文件    fwrite(&amp;audio_data-&gt;header, sizeof(struct WAVHeader), 1, outputFile);    fwrite(audio_data-&gt;sample, audio_data-&gt;header.subchunk2Size, 1, outputFile);    // 关闭文件    fclose(outputFile);}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>源码地址：<a href="https://github.com/lyc18/C-CPP-read-write-WAV">https://github.com/lyc18/C-CPP-read-write-WAV</a></p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工作学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C/C++ </tag>
+            
+            <tag> 编程实现 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello World</title>
       <link href="/2023/10/03/hello-world/"/>
       <url>/2023/10/03/hello-world/</url>

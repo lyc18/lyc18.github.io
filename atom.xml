@@ -6,7 +6,7 @@
   <link href="http://lyc18.github.io/atom.xml" rel="self"/>
   
   <link href="http://lyc18.github.io/"/>
-  <updated>2023-10-03T11:21:36.401Z</updated>
+  <updated>2023-10-13T15:32:38.972Z</updated>
   <id>http://lyc18.github.io/</id>
   
   <author>
@@ -15,6 +15,60 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>struct字节对齐与使用问题</title>
+    <link href="http://lyc18.github.io/2023/10/13/struct-zi-jie-dui-qi-yu-shi-yong-wen-ti/"/>
+    <id>http://lyc18.github.io/2023/10/13/struct-zi-jie-dui-qi-yu-shi-yong-wen-ti/</id>
+    <published>2023-10-13T15:20:51.000Z</published>
+    <updated>2023-10-13T15:32:38.972Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;stuct字节对齐&quot;&gt;&lt;a href=&quot;#stuct字节对齐&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="工作学习" scheme="http://lyc18.github.io/categories/%E5%B7%A5%E4%BD%9C%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="C/C++" scheme="http://lyc18.github.io/tags/C-C/"/>
+    
+    <category term="编程问题" scheme="http://lyc18.github.io/tags/%E7%BC%96%E7%A8%8B%E9%97%AE%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C/C++实现读写WAV音频文件</title>
+    <link href="http://lyc18.github.io/2023/10/13/c-c-shi-xian-du-xie-wav-yin-pin-wen-jian/"/>
+    <id>http://lyc18.github.io/2023/10/13/c-c-shi-xian-du-xie-wav-yin-pin-wen-jian/</id>
+    <published>2023-10-13T15:00:57.000Z</published>
+    <updated>2023-10-13T15:32:28.088Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;C-C-实现读写WAV音频文件&quot;&gt;&lt;a href=&quot;#C-C-实现读写WAV音频文件&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="工作学习" scheme="http://lyc18.github.io/categories/%E5%B7%A5%E4%BD%9C%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="C/C++" scheme="http://lyc18.github.io/tags/C-C/"/>
+    
+    <category term="编程实现" scheme="http://lyc18.github.io/tags/%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
