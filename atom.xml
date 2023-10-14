@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
+  <title>沐曦旅人</title>
   
-  
+  <subtitle>沐曦旅人</subtitle>
   <link href="http://lyc18.github.io/atom.xml" rel="self"/>
   
   <link href="http://lyc18.github.io/"/>
-  <updated>2023-10-13T15:32:38.972Z</updated>
+  <updated>2023-10-14T15:39:43.249Z</updated>
   <id>http://lyc18.github.io/</id>
   
   <author>
-    <name>Yongchang Li</name>
+    <name>沐曦旅人</name>
     
   </author>
   
@@ -21,7 +21,7 @@
     <link href="http://lyc18.github.io/2023/10/13/struct-zi-jie-dui-qi-yu-shi-yong-wen-ti/"/>
     <id>http://lyc18.github.io/2023/10/13/struct-zi-jie-dui-qi-yu-shi-yong-wen-ti/</id>
     <published>2023-10-13T15:20:51.000Z</published>
-    <updated>2023-10-13T15:32:38.972Z</updated>
+    <updated>2023-10-14T15:39:43.249Z</updated>
     
     
       
