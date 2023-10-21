@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="struct字节对齐与使用问题, 沐曦旅人">
+    <meta name="keywords" content="宏的使用与注意事项, 沐曦旅人">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>struct字节对齐与使用问题 | 沐曦旅人</title>
+    <title>宏的使用与注意事项 | 沐曦旅人</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/lyc18/lyc18.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/lyc18/lyc18.github.io/libs/awesome/css/all.css">
@@ -326,12 +326,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/lyc18/lyc18.github.io/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/lyc18/lyc18.github.io/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">struct字节对齐与使用问题</h1>
+                    <h1 class="description center-align post-title">宏的使用与注意事项</h1>
                 </div>
             </div>
         </div>
@@ -382,28 +382,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-10-13
+                    2023-10-21
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-10-14
+                    2023-10-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    2.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    8 分
                 </div>
                 
 
@@ -426,131 +426,220 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="stuct字节对齐"><a href="#stuct字节对齐" class="headerlink" title="stuct字节对齐"></a><code>stuct</code>字节对齐</h1><p>在C和C++中，<code>struct</code>的成员在内存中的排序方式受到字节对齐的影响，<code>struct</code>的字节对齐通常以结构体的成员中具有最大对齐需求的成员为基准。例如，如果一个<code>struct</code>中包含<code>int</code>和<code>char</code>类型的成员，那么由于<code>int</code>的字节对齐需求通常较大，因此整个结构体将按照<code>int</code>的字节大小进行字节对齐。</p>
-<h2 id="字节对齐规则"><a href="#字节对齐规则" class="headerlink" title="字节对齐规则"></a>字节对齐规则</h2><ol>
-<li>结构体第一个成员的偏移量为0。</li>
-<li>结构体其他成员的偏移量为该成员大小与对齐值中较小的那个的整数倍。若成员为结构体类型，则按照结构体中最大成员大小与对齐值进行比较。</li>
-<li>结构体的总大小为对齐值的整数倍。</li>
-</ol>
-<blockquote>
-<p>对齐值默认为结构体成员中最大的那个，当然也可以通过伪指令或attribute关键字手动设置（优先级高）。</p>
-</blockquote>
-<h2 id="验证实验"><a href="#验证实验" class="headerlink" title="验证实验"></a>验证实验</h2><p>通过具体的实验验证这一特性：</p>
-<ol>
-<li>假设由如下三个结构体：</li>
-</ol>
-<pre class="line-numbers language-C" data-language="C"><code class="language-C">struct struct_1 {
-    uint8_t a;   // uint8_t占用一个字节
-    uint16_t b;  // uint16_t占用两个字节
-    uint32_t c;  // uint32_t占用四个字节
-};
+                <h1 id="宏的使用与注意事项"><a href="#宏的使用与注意事项" class="headerlink" title="宏的使用与注意事项"></a>宏的使用与注意事项</h1><p>宏是C/C++的预处理指令，用于在编译前的预处理阶段执行文本替换、条件编译等功能。宏的使用可以减少代码重复，提高代码的可维护性，以及实现一些灵活性要求。然而，宏存在一些潜在问题，这些问题往往非常难以察觉，且在编译阶段无法被检测到。更令人担忧的是，宏在一些情况下可以正常运行并返回期望的结果，但稍不慎重就可能引发难以追踪的错误。这些问题包括宏参数的副作用、宏的优先级问题、宏名冲突、宏展开的意外结果等。因此，在使用宏时，必须谨慎思考，正确书写宏定义，避免可能导致混淆和错误的宏使用，以确保代码的可读性和稳定性。</p>
+<h1 id="宏的基本使用"><a href="#宏的基本使用" class="headerlink" title="宏的基本使用"></a>宏的基本使用</h1><h2 id="文本替换"><a href="#文本替换" class="headerlink" title="文本替换"></a>文本替换</h2><p>宏最常见的用途是进行文本替换，通过宏定义，你可以将一个标识符关联到一个文本片段，当程序中使用这个宏时，它会被替换为定义的文本。例如：</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">// 定义常量
+#define PI 3.14159<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-struct struct_2 {
-    uint16_t a;
-    uint16_t b;
-    uint32_t c;
-};
+<p>通过上面的宏定义，语句</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">double circleArea = 3.14159 * radius * radius;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-struct struct_3 {
-    uint16_t a;
-    uint32_t b;
-    uint16_t c;
-};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>就可以写成</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">double circleArea = PI * radius * radius;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ol start="2">
-<li>分别输出三个结构体占用字节数</li>
-</ol>
-<pre class="line-numbers language-C" data-language="C"><code class="language-C">printf("struct_1 size: %d\n", sizeof(struct struct_1));  // struct_1 size: 8
-printf("struct_2 size: %d\n", sizeof(struct struct_2));  // struct_2 size: 8
-printf("struct_3 size: %d\n", sizeof(struct struct_3));  // struct_3 size: 12<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>受到字节对齐的影响，结构体中成员的类型与顺序都会影响到最终整个结构体占用的内存大小。</p>
-<ol start="3">
-<li>结构体在内存中实际的分布</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/lyc18/Picture-bed@main/img/202310132212579.png" alt="image.drawio"></p>
-<ul>
-<li><code>struct1</code>中<code>uint32_t</code>的字节最大，因此<code>struct1</code>以4字节对齐。</li>
-<li><code>uint8_t</code> 占用1个字节，且为结构体中的第一个成员，因此偏移量为0.</li>
-<li><code>uint16_t </code> 占用2个字节，比对齐值小，因此<code>uint16_t</code>成员的偏移量为2的整数倍，在此处偏移量为2。</li>
-<li><code>uint32_t</code>大小为4字节，与对齐值相同，因此<code>uint16_t</code>成员的偏移量为4的整数倍，在此处偏移量为4。</li>
-<li><code>struct2</code>与<code>struct3</code>同理。</li>
+<h3 id="易踩坑点"><a href="#易踩坑点" class="headerlink" title="易踩坑点"></a>易踩坑点</h3><ul>
+<li>宏定义的常量仅会在预处理阶段对标识符进行替换，若常量中有一些运算表达式，则有可能得到错误的结果。如</li>
 </ul>
-<h1 id="struct字节对齐引发的问题"><a href="#struct字节对齐引发的问题" class="headerlink" title="struct字节对齐引发的问题"></a><code>struct</code>字节对齐引发的问题</h1><ul>
-<li>不合理的成员顺序，可能会造成大量的内存空间浪费。</li>
-<li>若使用内存拷贝对结构体进行赋值，若结构体内存不是紧凑的，即有部分填充字节，则可能无法获得正确的拷贝结果。<ul>
-<li>如<code>sturct1</code>中想要赋值的结果为<code>a = 0x00, b = 0x0102, c = 0x03040506</code>，而实际结果为<code>a = 0x00, b = 0x0203, c = 0x04050607</code>。</li>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">// 定义常量
+#define BASE 10+10
+
+// 有如下使用情况，想要实现语句为 int A = (10 + 10) * 2;
+int A = BASE * 2;      // 编程时理想结果为20
+// 但实际执行语句是
+int A = 10 + (10 * 2); // 实际结果为30<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="类型替换"><a href="#类型替换" class="headerlink" title="类型替换"></a>类型替换</h2><p>通过将变量类型用宏来代替，可以使程序更容易维护和移植。这种方式允许在需要修改变量类型时只需更新宏定义，而不必手动修改多个地方的具体类型声明。如</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">#define ULL unsigned long long<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>通过上述宏定义，语句</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">unsigned long long a;
+unsigned long long b;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>等价于</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">ULL a;
+ULL b;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="易踩坑点-1"><a href="#易踩坑点-1" class="headerlink" title="易踩坑点"></a>易踩坑点</h3><ul>
+<li>宏并不是类型定义，在试图声明多个变量时有可能发生问题。如有如下宏定义</li>
 </ul>
-</li>
-<li>注意同一内存块中的不同的成员变量并不一定是紧凑的顺序。（参考<code>struct1</code>的内存分布情况）</li>
-<li>使用内存拷贝的方式赋值时，需要注意大小端存储的问题。<ul>
-<li>如<code>struct1</code>中从内存角度上看为<code>a = 0x00, b = 0x0203, c = 0x04050607</code>，而若在程序中使用<code>printf</code>输出的结果可能为<code>a = 0x00, b = 0x0302, c = 0x07060504</code>。</li>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">#define ULLP unsigned long long *<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>使用上述宏定义声明两个变量</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">ULLP a,b;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>实际执行结果是</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">unsigned long long * a,b;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>即变量a的类型为指针变量，而b的类型为无符号长整形变量，等价于</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">unsigned long long * a;
+unsigned long long b;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="使用建议"><a href="#使用建议" class="headerlink" title="使用建议"></a>使用建议</h3><ul>
+<li>不要使用宏来替换类型，而是使用<code>typedef</code>或者<code>using</code>（C++）进行类型定义。如</li>
 </ul>
-</li>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">// 类型定义
+typedef unsigned long long * ULLP1;
+using ULLP2 = unsigned long long *;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>使用上述定义的类型声明变量， 其变量类型都为无符号长整形指针变量</p>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">ULLP1 a,b;
+ULLP2 c,b;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="条件编译"><a href="#条件编译" class="headerlink" title="条件编译"></a>条件编译</h2><p>宏常用于条件编译，以根据不同的编译选项包含或排除代码块。同时也可以方式头文件的重复引用。例如</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">// 如果定义了DEBUG宏，则程序包含调试代码，否则跳过编译
+#ifdef DEBUG
+// 调试代码
+#endif
+
+// 防止头文件重复引用
+#ifndef _HEADER_H
+#define _HEADER_H
+
+#endif<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="字符串化操作符"><a href="#字符串化操作符" class="headerlink" title="字符串化操作符"></a>字符串化操作符</h2><p> <code>#</code> 操作符用于将宏参数转化为字符串。这对于将变量名转化为字符串常量非常有用。例如</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">#define STRINGIZE(x) #x
+char* varName = STRINGIZE(variable); // 转化为 "variable"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="连接操作符"><a href="#连接操作符" class="headerlink" title="连接操作符"></a>连接操作符</h2><p><code>##</code> 操作符用于将两个宏参数连接在一起，创建一个新的标识符。这对于动态生成标识符和名称很有用。例如</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">#define CONCAT(a, b) a##b
+int result = CONCAT(x, y); // 创建一个新标识符 "xy"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="带参数的宏"><a href="#带参数的宏" class="headerlink" title="带参数的宏"></a>带参数的宏</h2><p>宏可以接受参数，使其更加通用，从表面上看其行为与函数非常相似，但注意宏并不是函数。例如</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">#define abs(x) (((x)&gt;=0)?(x):-(x))<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>实现了一个类似abs()函数的带参数的宏，且使用方法与函数调用相同</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">abs(x);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>但是它并不是函数调用，而是在编译时期进行符号替换，即实际代码是</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">(((x)&gt;=0)?(x):-(x));<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="易踩坑点-2"><a href="#易踩坑点-2" class="headerlink" title="易踩坑点"></a>易踩坑点</h3><ul>
+<li>带参数的宏中宏名与括号中间不能有空格。例如</li>
 </ul>
-<h2 id="验证实验-1"><a href="#验证实验-1" class="headerlink" title="验证实验"></a>验证实验</h2><pre class="line-numbers language-C" data-language="C"><code class="language-C">uint8_t data[] = {0x00, 0x01,0x02, 0x03, 0x04, 0x05, 0x06 , 0x07, 0x08, 0x09, 0x0A, 0x0B};
-struct_1 s1;
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">#define abs (x) (((x)&gt;=0)?(x):-(x))<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-memcpy(&amp;s1, data, sizeof(struct_1));
-
-printf("struct1 uint8_t address: 0x%x\n",(void*)(&amp;(s1.a)));  // struct1 uint8_t address: 0xc87ff62c
-printf("struct1 uint16_t address: 0x%x\n",(void*)(&amp;(s1.b))); // struct1 uint16_t address: 0xc87ff62e
-printf("struct1 uint32_t address: 0x%x\n",(void*)(&amp;(s1.c))); // struct1 uint32_t address: 0xc87ff630
-
-printf("struct1 uint8_t value: 0x%0.2x\n",s1.a);  // struct1 uint8_t value: 0x00
-printf("struct1 uint16_t value: 0x%0.4x\n",s1.b); // struct1 uint16_t value: 0x0302
-printf("struct1 uint32_t value: 0x%0.8x\n",s1.c); // struct1 uint32_t value: 0x07060504<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h1 id="struct字节对齐的优势"><a href="#struct字节对齐的优势" class="headerlink" title="struct字节对齐的优势"></a><code>struct</code>字节对齐的优势</h1><ul>
-<li>两个同类型的结构体变量可以直接赋值。</li>
-<li>提高访问速度。</li>
-<li>减少内存浪费。</li>
-</ul>
-<h1 id="手动设置字节对齐值"><a href="#手动设置字节对齐值" class="headerlink" title="手动设置字节对齐值"></a>手动设置字节对齐值</h1><h2 id="伪指令"><a href="#伪指令" class="headerlink" title="伪指令"></a>伪指令</h2><ul>
-<li>使用伪指令<code>#pragma pack(n)</code>，C编译器将按照n个字节对齐。</li>
-<li>使用伪指令<code>#pragma pack()</code>,C编译器将取消自定义字节对齐方式。</li>
-</ul>
-<blockquote>
-<p>此方法会影响到后续的字节对齐值。</p>
-</blockquote>
-<h3 id="验证实验-2"><a href="#验证实验-2" class="headerlink" title="验证实验"></a>验证实验</h3><pre class="line-numbers language-C" data-language="C"><code class="language-C">struct struct_4 {
-        uint8_t a;
-        uint16_t b;
-        uint32_t c;
-    };
-#pragma pack(1)
-struct struct_5 {
-    uint8_t a;
-    uint16_t b;
-    uint32_t c;
-};
-
-struct struct_6 {
-    uint8_t a;
-    uint16_t b;
-    uint32_t c;
-};
-#pragma pack(8)
-struct struct_7 {
-    uint8_t a;
-    uint16_t b;
-    uint32_t c;
-};
-
-printf("struct_4 size: %d\n", sizeof(struct struct_4));  // struct_4 size: 8
-printf("struct_5 size: %d\n", sizeof(struct struct_5));  // struct_5 size: 7
-printf("struct_6 size: %d\n", sizeof(struct struct_6));  // struct_6 size: 7
-printf("struct_7 size: %d\n", sizeof(struct struct_7));  // struct_7 size: 8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>实际是定义了一个abs宏其会在编译时期，将所有的abs替换为</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">(x) (((x)&gt;=0)?(x):-(x))<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
-<li>按照默认的对齐规则，结构体的大小为4字节。</li>
-<li>使用伪指令设置对齐值为1后，结构体的大小为4字节，且影响了后续所有结构体的对齐值。</li>
-<li>若手动设置的对齐值比结构体中所有的成员都大，则根据字节对齐原则，相当于无效设置。</li>
+<li>传入宏的参数为一个表达式时，会产生一些问题。例如</li>
 </ul>
-<h2 id="使用C关键字"><a href="#使用C关键字" class="headerlink" title="使用C关键字"></a>使用C关键字</h2><ul>
-<li>使用<code>__attribute((aligned(n)))</code>，可以指定单个结构体的对齐值（不确保一定生效）。</li>
-<li>使用<code>__attribute((packed))</code>，可以取消单个结构体在编译过程中的优化对齐，即取消字节对齐。</li>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">#define abs(x) x&gt;=0?x:-x<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>则使用时若x为一个表达式，则有可能会获得错误的结果</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">abs(a+b);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>实际展开后的结果为</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">a+b&gt;=0?a+b:-a+b;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>在这种情况下若<code>a+b&gt;=0</code>则会或则正确的结果，但是若<code>a+b&lt;0</code>则得到的结果为<code>-a+b</code>，而正确的结果应该为<code>-(a+b)</code>。因此，在宏定义中最好把每个参数都用括号括起来，以确保正确的参数解析和避免潜在的问题。</p>
+<ul>
+<li>宏用于一个更大的表达式时，会产生一些问题。例如</li>
 </ul>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">#define abs(x) (x)&gt;=0?(x):-(x)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>当有如下使用场景</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">abs(x)+1;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>实际展开后的结果为</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">x&gt;=0?x:-x+1;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>在这种情况下若<code>x&lt;0</code>则会或则正确的结果，但是若<code>x&gt;=0</code>则得到的结果为<code>x</code>，而正确的结果应该为<code>x+1</code>。因此，对于宏整个结果表达式也应该用括号括起来。</p>
+<ul>
+<li>当传入宏的参数值会随调用的次数改变时，会产生一些问题。例如</li>
+</ul>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">#define abs(x) (x)&gt;=0?(x):-(x)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>当有如下使用场景</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">abs(++x);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>实际展开后的结果为</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">++x &gt;= 0 ? ++x : -(++x);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>在这种情况下对x进行了两次的自增操作，若<code>x&gt;=0</code>，其实际得到的结果为<code>x+2</code>；若<code>x&lt;0</code>，其实际得到的结果为<code>-(x+2)</code> ，得出的都为错误的结果。</p>
+<h3 id="使用建议-1"><a href="#使用建议-1" class="headerlink" title="使用建议"></a>使用建议</h3><ul>
+<li>注意宏名与括号中间是否有空格。</li>
+<li>把每个参数都用括号括起来。</li>
+<li>整个结果表达式也应该用括号括起来。</li>
+<li>可以使用<code>inline</code>函数替换。<code>inline</code>声明的函数，编译器会对其进行参数类型检查。<ul>
+<li><code>inline</code>修饰的函数，在编译时会在调用内联函数的地方展开，没有函数压栈的开销。与带参数的宏的功能相同，但是比其更加安全。</li>
+<li><code>inline</code>只是对编译器的一个建议，编译器可以选择是否进行优化。</li>
+<li><code>inline</code>必须和函数定义放在一起才起作用。</li>
+<li>可以将<code>inline</code>函数在头文件中定义，通常配合<code>static</code>进行使用。例如</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">static inline void test() {
+    ...
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>使用static关键字的作用是将函数的链接性限定为内部，使其仅在当前文件内可见，从而有效地防止与其他文件定义的同名函数发生命名冲突。</p>
+</blockquote>
+<h2 id="减少重复代码"><a href="#减少重复代码" class="headerlink" title="减少重复代码"></a>减少重复代码</h2><p>在编程过程中，经常会遇到需要实现一系列相似但重复的函数。这些函数通常具有高度的重复性和规律性。为了减少代码输入，提高代码的可维护性，可以使用宏来生成这些函数，从而减少编写重复代码的工作量。例如</p>
+<p>在C程序中由于没有C++的模板函数功能，针对同一功能函数，不同的参数类型，我们需要定义多个相似的函数</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">int_type get_int(int_type src){
+    ...
+    return int_xxx;
+}
+
+double_type get_double(double_type src){
+    ...
+    return double_xxx;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>我们可以定义如下宏</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">#define get_xxx(type)\
+type##_type get_##type(type##_type src){\
+	...\
+    return type##_xxx;\
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>则上述程序的定义就可以简化为</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">get_xxx(int)
+get_xxx(double)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p><code>\</code>加入宏定义的行末尾，指示后面一行依然是宏的内容。</p>
+</blockquote>
+<h1 id="宏使用过程中其他的注意事项"><a href="#宏使用过程中其他的注意事项" class="headerlink" title="宏使用过程中其他的注意事项"></a>宏使用过程中其他的注意事项</h1><h2 id="宏并不是语句"><a href="#宏并不是语句" class="headerlink" title="宏并不是语句"></a>宏并不是语句</h2><p>在一些特殊结构中（如分支结构），宏有可能和这些结构产生一些奇妙的”化学反应“。假设有如下宏定义</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">#define printf_error(x) if(x&gt;0) printf("xxxx")<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>并且有如下使用场景</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">if(...)
+    printf_error(x);
+else
+    printf_error(y);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>则实际的展开为</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">if(...)
+    if(x&gt;0) printf("xxxx");
+else
+    if(y&gt;0) printf("xxxx");<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>根据if-else结合规则，实际代码等价于</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">if(...)
+{
+    if(x&gt;0) {
+        printf("xxxx");
+    } 
+    else{
+        if(y&gt;0) {
+            printf("xxxx");
+        }
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这种隐式的错误极难发现，且不好追踪修复。</p>
+<h2 id="使用建议-2"><a href="#使用建议-2" class="headerlink" title="使用建议"></a>使用建议</h2><ul>
+<li>将if语句使用<code>?:</code>运算符或者<code>||</code>运算替换。</li>
+<li>使用<code>do{}while(0)</code>包含定义,使之称为一个完整的语句。</li>
+</ul>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">#define printf_error(x) do{if(x&gt;0) printf("xxxx");}while(0);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
 
                 
             </div>
@@ -577,7 +666,7 @@ printf("struct_7 size: %d\n", sizeof(struct struct_7));  // struct_7 size: 8<spa
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://lyc18.github.io/2023/10/13/struct-zi-jie-dui-qi-yu-shi-yong-wen-ti/">http://lyc18.github.io/2023/10/13/struct-zi-jie-dui-qi-yu-shi-yong-wen-ti/</a>
+                    <a href="http://lyc18.github.io/2023/10/21/hong-de-shi-yong-yu-zhu-yi-shi-xiang/">http://lyc18.github.io/2023/10/21/hong-de-shi-yong-yu-zhu-yi-shi-xiang/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -790,9 +879,10 @@ printf("struct_7 size: %d\n", sizeof(struct struct_7));  // struct_7 size: 8<spa
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2023/10/21/hong-de-shi-yong-yu-zhu-yi-shi-xiang/">
                     <div class="card-image">
@@ -809,9 +899,9 @@ printf("struct_7 size: %d\n", sizeof(struct struct_7));  // struct_7 size: 8<spa
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-10-21
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-21
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -824,6 +914,7 @@ printf("struct_7 size: %d\n", sizeof(struct struct_7));  // struct_7 size: 8<spa
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -846,18 +937,18 @@ printf("struct_7 size: %d\n", sizeof(struct struct_7));  // struct_7 size: 8<spa
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/10/13/c-c-shi-xian-du-xie-wav-yin-pin-wen-jian/">
+                <a href="/2023/10/13/struct-zi-jie-dui-qi-yu-shi-yong-wen-ti/">
                     <div class="card-image">
                         
-                        <img src="https://cdn.jsdelivr.net/gh/lyc18/lyc18.github.io/medias/featureimages/2.jpg" class="responsive-img" alt="C/C++实现读写WAV音频文件">
+                        <img src="https://cdn.jsdelivr.net/gh/lyc18/lyc18.github.io/medias/featureimages/1.jpg" class="responsive-img" alt="struct字节对齐与使用问题">
                         
-                        <span class="card-title">C/C++实现读写WAV音频文件</span>
+                        <span class="card-title">struct字节对齐与使用问题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            使用C语言读写通用WAV音频文件的简单实现。
+                            在C和C++中，struct的成员在内存中的排序方式受到字节对齐的影响，这一特性会引发一些问题，在实际编程中需要注意。
                         
                     </div>
                     <div class="publish-info">
@@ -883,8 +974,8 @@ printf("struct_7 size: %d\n", sizeof(struct struct_7));  // struct_7 size: 8<spa
                         <span class="chip bg-color">C/C++</span>
                     </a>
                     
-                    <a href="/tags/%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0/">
-                        <span class="chip bg-color">编程实现</span>
+                    <a href="/tags/%E7%BC%96%E7%A8%8B%E9%97%AE%E9%A2%98/">
+                        <span class="chip bg-color">编程问题</span>
                     </a>
                     
                 </div>
